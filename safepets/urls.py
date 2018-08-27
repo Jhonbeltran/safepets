@@ -15,12 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.http import HttpResponse
-
-# Esta no es una forma adecuada, pero nos muestra la flexibilidad de django
-# Lo normal sería trabajar esta funcion desde una vista en una app
-def hello_wold(request):
-    return HttpResponse('Hello world!')
+from safepets.views import hello_wold
 
 urlpatterns = [
     path('admin/', admin.site.urls),
