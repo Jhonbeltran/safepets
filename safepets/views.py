@@ -28,4 +28,12 @@ def sort_numbers(request):
         'numbers': {i: numbers_sort[i] for i in range(len(numbers_sort))},
         'message': 'Integers sorted Succesfuully'
     }
-    return HttpResponse(json.dumps(numbers_sort, indent=4), content_type='application/json')
+    return HttpResponse(json.dumps(numbers_sort, indent=4),
+                        content_type='application/json')
+
+def hi(request, name, age):
+    if age < 12:
+        message = "Sorry {}, you're not old enough to login".format(name)
+    else:
+        message = "Hi {}! Welcome to SafePets".format(name)
+    return HttpResponse(message)
