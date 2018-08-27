@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+
+# Esta no es una forma adecuada, pero nos muestra la flexibilidad de django
+# Lo normal sería trabajar esta funcion desde una vista en una app
+def hello_wold(request):
+    return HttpResponse('Hello world!')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('hello-world/', hello_wold)
 ]
