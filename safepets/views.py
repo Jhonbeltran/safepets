@@ -17,7 +17,8 @@ def trace(request):
 def sort_numbers(request):
     """ http://localhost:8000/numbers/?numbers=10,4,5,37 """
     values = request.GET['numbers'].split(',')
-    numbers = list(map(lambda x: int(x), values))
+    #numbers = list(map(lambda x: int(x), values))
+    numbers = [int(i) for i in values]
     numbers_sort = sorted(numbers)
     numbers_dict = {i: numbers_sort[i] for i in range(len(numbers_sort))}
     return JsonResponse(numbers_dict)
