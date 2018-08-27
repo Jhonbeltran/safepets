@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from safepets.views import hello_world
+from safepets.views import hello_world, trace
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello-world/', hello_world)
+    path('hello-world/', hello_world),
+    path('trace/', trace)
 ]
