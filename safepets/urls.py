@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from safepets.views import hello_world, trace
+from safepets.views import hello_world, trace, sort_numbers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello-world/', hello_world),
-    path('trace/', trace)
+    path('trace/', trace),
+    path('numbers/', sort_numbers)
 ]
