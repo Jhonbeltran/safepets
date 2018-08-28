@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from safepets import views
+from safepets import views as local_views
+from posts import views as posts_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello-world/', views.hello_world),
-    path('trace/', views.trace),
-    path('numbers/', views.sort_numbers),
-    path('hi/<str:name>/<int:age>/', views.hi)
+    path('hello-world/', local_views.hello_world),
+    path('trace/', local_views.trace),
+    path('numbers/', local_views.sort_numbers),
+    path('hi/<str:name>/<int:age>/', local_views.hi),
+
+    path('posts/', posts_views.list_posts)
 ]
