@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SafePets</title>
+  </head>
+  <body>
+    <br><br>
+    <div class="container">
+      <div class="row">
+        {% for post in posts %}
+            <p>{{post.user.name}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
