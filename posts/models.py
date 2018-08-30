@@ -15,3 +15,6 @@ class User(models.Model):
     birth_date = models.DateField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     modify = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.email
