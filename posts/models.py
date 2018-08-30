@@ -1,8 +1,8 @@
 """ Post models """
 from django.db import models
 
-class Users(models.Model):
-    """ Post Users """
+class User(models.Model):
+    """ Post User """
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
 
