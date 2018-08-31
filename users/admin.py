@@ -15,3 +15,6 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'user__email',
                      'user__first_name', 'user__last_name',
                      'phone_number')
+
+    """ List filters (Django know when we use a date) """
+    list_filter = ('created', 'modified')
