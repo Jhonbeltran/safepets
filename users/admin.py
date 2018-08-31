@@ -19,3 +19,20 @@ class ProfileAdmin(admin.ModelAdmin):
     """ List filters (Django know when we use a date) """
     list_filter = ('created', 'modified', 'user__is_active',
                    'user__is_staff')
+
+    """ Order to display fields """
+    fieldsets = (
+        ('Profile', {
+            'fields':(('user', 'picture'),)
+        }),
+        ('Extra Info', {
+            'fields':(
+                ('website', 'phone_number'),
+                ('biography'))
+        }),
+        ('Metadata', {
+            'fields':(('created', 'modified'),)
+        }),
+    )
+
+    readonly_fields = ('created', 'modified')
