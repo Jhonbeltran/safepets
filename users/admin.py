@@ -49,6 +49,13 @@ class ProfileInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     """ Add profile admin to base user admin. """
     inlines = (ProfileInline,)
+    list_display = (
+        'username',
+        'email',
+        'is_active',
+        'is_staff',
+        'pk',
+    )
 
 """Unregister the User model that provides Django """
 admin.site.unregister(User)
