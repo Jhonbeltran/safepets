@@ -11,3 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display_links = ('pk', 'user',)
     """Fields editables into de columns"""
     list_editable = ('phone_number', 'website', 'picture')
+    """Search Fields (some of them are from auth.user)"""
+    search_fields = ('user__username', 'user__email',
+                     'user__first_name', 'user__last_name',
+                     'phone_number')
