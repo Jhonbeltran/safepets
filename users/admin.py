@@ -17,4 +17,5 @@ class ProfileAdmin(admin.ModelAdmin):
                      'phone_number')
 
     """ List filters (Django know when we use a date) """
-    list_filter = ('created', 'modified')
+    list_filter = ('created', 'modified', 'user__is_active',
+                   'user__is_staff')
