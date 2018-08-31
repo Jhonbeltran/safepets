@@ -1,5 +1,7 @@
 from django.contrib import admin
 from users.models import Profile
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -36,3 +38,19 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('created', 'modified')
+
+class ProfileInline(admin.StackedInline):
+    """Profile in-line admin for users"""
+
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'profiles'
+
+class UserAdmin(BaseUserAdmin):
+    """ Add profile admin to base user admin. """
+    inlines = (ProfileInline,)
+
+"""Unregister the User model that provides Django """
+admin.site.unregister(User)
+""" Register our new User with Profile (Model, Class)"""
+admin.site.register(User, UserAdmin)
