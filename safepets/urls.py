@@ -17,15 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from safepets import views as local_views
 from posts import views as posts_views
+from users import views as users_views
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello-world/', local_views.hello_world),
-    path('trace/', local_views.trace),
-    path('numbers/', local_views.sort_numbers),
-    path('hi/<str:name>/<int:age>/', local_views.hi),
+    path('hello-world/', local_views.hello_world, name='hello_world'),
+    path('trace/', local_views.trace, name='trace'),
+    path('numbers/', local_views.sort_numbers, name='numbers_sorted'),
+    path('hi/<str:name>/<int:age>/', local_views.hi, name='hi'),
 
-    path('posts/', posts_views.list_posts)
+    path('posts/', posts_views.list_posts, name='feed'),
+    path('users/login', users_views.login_view, name='login')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
