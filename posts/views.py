@@ -1,6 +1,7 @@
 from django.shortcuts import render
 # Utilities
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 posts = [
     {
@@ -32,6 +33,7 @@ posts = [
     }
 ]
 
+@login_required
 def list_posts(request):
     """ List of existing posts """
     # request, template, context
