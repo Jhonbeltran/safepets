@@ -37,6 +37,7 @@ def signup(request):
         user.first_name = request.POST['first_name']
         user.last_name = request.POST['last_name']
         user.email = request.POST['email']
+        user.save()
 
         phone_number = request.POST['phone_number']
 
