@@ -17,6 +17,10 @@ def login_view(request):
 
     return render(request, 'users/login.html')
 
+def signup(request):
+    """ Sign Up Users """
+    return render(request, 'users/signup.html')
+
 @login_required
 def logout_view(request):
     logout(request)
