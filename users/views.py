@@ -12,7 +12,16 @@ from django.db.utils import IntegrityError
 
 def update_profile(request):
     """ Update a user's profile view """
-    return render(request, 'users/update_profile.html')
+    #request.user is provided for a middleware auth
+    profile = request.user.profile
+    return render(
+        request = request,
+        template_name= 'users/update_profile.html',
+        context={
+            'profile': profile,
+            'user': request.user
+        }
+    )
 
 # Create your views here.
 def login_view(request):
