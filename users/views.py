@@ -20,7 +20,15 @@ def update_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data)
+            data = form.cleaned_data
+
+            profile.website = data['website']
+            profile.phone_number = data['phone_number']
+            profile.picture = data['picture']
+            profile.biography = data['biography']
+            profile.save()
+
+            return redirect('update_profile')
     else:
         form = ProfileForm()
 
