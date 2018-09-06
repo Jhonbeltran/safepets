@@ -10,7 +10,7 @@ from users.models import Profile
 from django.db.utils import IntegrityError
 
 # Forms
-from users.forms import ProfileForm
+from users.forms import ProfileForm, SignupForm
 
 @login_required
 def update_profile(request):
@@ -60,33 +60,18 @@ def login_view(request):
 def signup(request):
     """ Sign Up Users """
     if request.method == 'POST':
-        username = request.POST['username']
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignupForm()
 
-        passwd = request.POST['passwd']
-        passwd_confirmation = request.POST['passwd_confirmation']
-
-        if passwd != passwd_confirmation:
-            return render(request, 'users/signup.html', {'error': "Passwords doesn't match"})
-
-        try:
-            """ Here we create the user just with the username and password,
-            as we create in the basic admin """
-            user = User.objects.create_user(username=username, password=passwd)
-        except IntegrityError:
-            return render(request, 'users/signup.html', {'error': "Username is already taken"})
-
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        user.save()
-
-        phone_number = request.POST['phone_number']
-
-        profile = Profile.objects.create(user=user, phone_number=phone_number)
-
-        return redirect('login')
-
-    return render(request, 'users/signup.html')
+    return render(
+        request = request,
+        template_name = 'users/signup.html',
+        context = {'form':form}
+    )
 
 @login_required
 def logout_view(request):
