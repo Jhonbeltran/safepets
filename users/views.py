@@ -28,7 +28,7 @@ def update_profile(request):
             profile.biography = data['biography']
             profile.save()
 
-            return redirect('update_profile')
+            return redirect('users:update_profile')
     else:
         form = ProfileForm()
 
