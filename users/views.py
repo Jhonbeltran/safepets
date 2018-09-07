@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView
+from django.views.generic import DetailView, FormView
 
 # Models
 from django.contrib.auth.models import User
@@ -34,6 +34,17 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         user = self.get_object()
         context['posts'] = Post.objects.filter(user=user).order_by('-created')
         return context
+
+class SignupView(FormView):
+    """ Users sign up view """
+    template_name = 'users/signup.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        """ save form data """
+        form.save()
+        return super().form_valid(form)
 
 @login_required
 def update_profile(request):
@@ -80,22 +91,6 @@ def login_view(request):
             return render(request, 'users/login.html', {'error': 'Invalid username and password'})
 
     return render(request, 'users/login.html')
-
-def signup(request):
-    """ Sign Up Users """
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('users:login')
-    else:
-        form = SignupForm()
-
-    return render(
-        request = request,
-        template_name = 'users/signup.html',
-        context = {'form':form}
-    )
 
 @login_required
 def logout_view(request):
