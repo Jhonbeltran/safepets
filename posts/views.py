@@ -24,7 +24,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     """ Return post detail """
     template_name = 'posts/detail.html'
     queryset = Post.objects.all()
-    context_object_name = 'posts'
+    context_object_name = 'post'
 
 @login_required
 def create_post(request):
