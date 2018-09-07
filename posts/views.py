@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 # Utilities
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # Forms
 from posts.forms import PostForm
@@ -18,6 +18,12 @@ class PostsFeedView(LoginRequiredMixin, ListView):
     model = Post
     ordering = ('-created',)
     paginate_by = 2
+    context_object_name = 'posts'
+
+class PostDetailView(LoginRequiredMixin, DetailView):
+    """ Return post detail """
+    template_name = 'posts/detail.html'
+    queryset = Post.objects.all()
     context_object_name = 'posts'
 
 @login_required
