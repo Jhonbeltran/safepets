@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
 
 # Models
 from django.contrib.auth.models import User
@@ -11,6 +12,17 @@ from django.db.utils import IntegrityError
 
 # Forms
 from users.forms import ProfileForm, SignupForm
+
+# Models
+
+from django.contrib.auth.models import User
+
+class UserDetailView(DetailView):
+    """ User detail view """
+    template_name = 'users/detail.html'
+    slug_field = 'username'
+    slug_url_kwarg = 'user'
+    queryset = User.objects.all()
 
 @login_required
 def update_profile(request):
