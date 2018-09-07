@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 
 # Models
@@ -19,7 +20,7 @@ from users.forms import ProfileForm, SignupForm
 from django.contrib.auth.models import User
 from posts.models import Post
 
-class UserDetailView(DetailView):
+class UserDetailView(LoginRequiredMixin, DetailView):
     """ User detail view """
     template_name = 'users/detail.html'
     slug_field = 'username'
