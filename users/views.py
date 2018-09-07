@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, FormView, UpdateView
@@ -67,7 +65,6 @@ class LoginView(auth_views.LoginView):
     """ Login User """
     template_name = 'users/login.html'
 
-@login_required
-def logout_view(request):
-    logout(request)
-    return redirect('users:login')
+class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
+    """ Logout view """
+    template_name = 'users/logged_out.html'
