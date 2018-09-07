@@ -17,6 +17,7 @@ from users.forms import ProfileForm, SignupForm
 # Models
 
 from django.contrib.auth.models import User
+from posts.models import Post
 
 class UserDetailView(DetailView):
     """ User detail view """
@@ -24,6 +25,14 @@ class UserDetailView(DetailView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     queryset = User.objects.all()
+    context_object_name = 'user'
+
+    def get_context_data(self, **kwargs):
+        """ Add user's posts to context. """
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['posts'] = Post.objects.filter(user=user).order_by('-created')
+        return context
 
 @login_required
 def update_profile(request):
